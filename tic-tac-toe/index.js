@@ -9,9 +9,7 @@ const trainingData = tf.tensor2d(tic_tac_toe.map(item => [
   item.LU, item.UU, item.RU, item.CL, item.CC, item.CR, item.LB, item.BB, item.RB
 ]))
 
-console.log(tic_tac_toe.map(item => [
-  item.LU, item.UU, item.RU, item.CL, item.CC, item.CR, item.LB, item.BB, item.RB
-]))
+console.log(tic_tac_toe.filter(item => item.result !== "positive" && item.result !== "negative"))
 const outputData = tf.tensor2d(tic_tac_toe.map(item => [
   item.result === "positive" ? 1 : 0,
   item.result === "negative" ? 1 : 0
@@ -49,6 +47,7 @@ model.fit(trainingData, outputData, {epochs: 1})
   .then(async (history) => {
     // console.log(history)
     model.predict(testingData).print()
+    await model.save(`file://${__dirname}/models`);
 
   })
 // test network
