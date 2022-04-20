@@ -24,13 +24,13 @@ const model = tf.sequential()
 model.add(tf.layers.dense({
   inputShape: [9],
   activation: "sigmoid",
-  units: 5,
+  units: 18,
 }))
 
 model.add(tf.layers.dense({
-  inputShape: [5],
+  inputShape: [18],
   activation: "sigmoid",
-  units: 3,
+  units: 9,
 }))
 model.add(tf.layers.dense({
   activation: "sigmoid",
@@ -43,7 +43,7 @@ model.compile({
 })
 // train/fit our network
 const startTime = Date.now()
-model.fit(trainingData, outputData, {epochs: 1})
+model.fit(trainingData, outputData, {epochs: 10000})
   .then(async (history) => {
     // console.log(history)
     model.predict(testingData).print()
